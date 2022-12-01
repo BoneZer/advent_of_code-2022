@@ -37,7 +37,6 @@ func getSumOfTopThreeCalories(inputCalories []int) int {
 }
 
 func getListOfElves(input []string) []int {
-
 	caloriesArray := []int{}
 	caloriesSum := 0
 

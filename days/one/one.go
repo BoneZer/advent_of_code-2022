@@ -1,16 +1,26 @@
 package one
 
 import (
+	"adventofcode/days"
 	"fmt"
 	"sort"
 	"strconv"
 )
 
-func ResolveTaskOne(input []string) int {
+func GetTask() days.Day {
+	return days.Day{
+		Name:             "One",
+		AbsoluteFilepath: "./days/one/input.txt",
+		Task1:            resolveTaskOne,
+		Task2:            resolveTaskTwo,
+	}
+}
+
+func resolveTaskOne(input []string) int {
 	return getMostCalories(getListOfCalories(input))
 }
 
-func ResolveTaskTwo(input []string) int {
+func resolveTaskTwo(input []string) int {
 	return getSumOfTopThreeCalories(getListOfCalories(input))
 }
 

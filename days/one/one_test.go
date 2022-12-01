@@ -42,8 +42,8 @@ func TestResolveTaskOne(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ResolveTaskOne(tt.args.input); got != tt.want {
-				t.Errorf("ResolveTaskOne() = %v, want %v", got, tt.want)
+			if got := resolveTaskOne(tt.args.input); got != tt.want {
+				t.Errorf("resolveTaskOne() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -68,8 +68,8 @@ func TestResolveTaskTwo(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ResolveTaskTwo(tt.args.input); got != tt.want {
-				t.Errorf("ResolveTaskTwo() = %v, want %v", got, tt.want)
+			if got := resolveTaskTwo(tt.args.input); got != tt.want {
+				t.Errorf("resolveTaskTwo() = %v, want %v", got, tt.want)
 			}
 		})
 	}

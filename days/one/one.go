@@ -2,6 +2,7 @@ package one
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 )
 
@@ -25,23 +26,10 @@ func getMostCalories(inputCalories []int) int {
 
 func getSumOfTopThreeCalories(inputCalories []int) int {
 	mostCalories := 0
-	topThreeCalories := []int{0, 0, 0}
 
-	for _, calories := range inputCalories {
-		if calories > topThreeCalories[0] {
-			topThreeCalories[2] = topThreeCalories[1]
-			topThreeCalories[1] = topThreeCalories[0]
-			topThreeCalories[0] = calories
-		} else if calories > topThreeCalories[1] {
-			topThreeCalories[2] = topThreeCalories[1]
-			topThreeCalories[1] = calories
+	sort.Ints(inputCalories)
 
-		} else if calories > topThreeCalories[2] {
-			topThreeCalories[2] = calories
-		}
-	}
-
-	for _, calories := range topThreeCalories {
+	for _, calories := range inputCalories[len(inputCalories)-3:] {
 		mostCalories += calories
 	}
 

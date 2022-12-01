@@ -7,21 +7,16 @@ import (
 )
 
 func ResolveTaskOne(input []string) int {
-	return getMostCalories(getListOfElves(input))
+	return getMostCalories(getListOfCalories(input))
 }
 
 func ResolveTaskTwo(input []string) int {
-	return getSumOfTopThreeCalories(getListOfElves(input))
+	return getSumOfTopThreeCalories(getListOfCalories(input))
 }
 
 func getMostCalories(inputCalories []int) int {
-	mostCalories := 0
-	for _, calories := range inputCalories {
-		if calories > mostCalories {
-			mostCalories = calories
-		}
-	}
-	return mostCalories
+	sort.Ints(inputCalories)
+	return inputCalories[len(inputCalories)-1]
 }
 
 func getSumOfTopThreeCalories(inputCalories []int) int {
@@ -36,7 +31,7 @@ func getSumOfTopThreeCalories(inputCalories []int) int {
 	return mostCalories
 }
 
-func getListOfElves(input []string) []int {
+func getListOfCalories(input []string) []int {
 	caloriesArray := []int{}
 	caloriesSum := 0
 

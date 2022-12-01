@@ -127,7 +127,7 @@ func Test_getSumOfTopThreeCalories(t *testing.T) {
 	}
 }
 
-func Test_getListOfElves(t *testing.T) {
+func Test_getListOfCalories(t *testing.T) {
 	type args struct {
 		input []string
 	}
@@ -146,8 +146,8 @@ func Test_getListOfElves(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := getListOfElves(tt.args.input); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("getListOfElves() = %v, want %v", got, tt.want)
+			if got := getListOfCalories(tt.args.input); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("getListOfCalories() = %v, want %v", got, tt.want)
 			}
 		})
 	}

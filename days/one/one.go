@@ -1,75 +1,63 @@
 package one
 
 import (
+	"adventofcode/days"
 	"fmt"
+	"sort"
 	"strconv"
 )
 
-type elf struct {
-	calories int
-}
-
-func ResolveTaskOne(input []string) int {
-	return getMostCalories(getListOfElves(input))
-}
-
-func ResolveTaskTwo(input []string) int {
-	return getSumOfTopThreeCalories(getListOfElves(input))
-}
-
-func getMostCalories(elves []elf) int {
-	mostCalories := 0
-	for _, elf := range elves {
-		if elf.calories > mostCalories {
-			mostCalories = elf.calories
-		}
+func GetTask() days.Day {
+	return days.Day{
+		Name:             "One",
+		AbsoluteFilepath: "./days/one/input.txt",
+		Task1:            resolveTaskOne,
+		Task2:            resolveTaskTwo,
 	}
-	return mostCalories
 }
 
-func getSumOfTopThreeCalories(elves []elf) int {
+func resolveTaskOne(input []string) int {
+	return getMostCalories(getListOfCalories(input))
+}
+
+func resolveTaskTwo(input []string) int {
+	return getSumOfTopThreeCalories(getListOfCalories(input))
+}
+
+func getMostCalories(inputCalories []int) int {
+	sort.Ints(inputCalories)
+	return inputCalories[len(inputCalories)-1]
+}
+
+func getSumOfTopThreeCalories(inputCalories []int) int {
 	mostCalories := 0
-	topThreeCalories := []int{0, 0, 0}
 
-	for _, elf := range elves {
-		if elf.calories > topThreeCalories[0] {
-			topThreeCalories[2] = topThreeCalories[1]
-			topThreeCalories[1] = topThreeCalories[0]
-			topThreeCalories[0] = elf.calories
-		} else if elf.calories > topThreeCalories[1] {
-			topThreeCalories[2] = topThreeCalories[1]
-			topThreeCalories[1] = elf.calories
+	sort.Ints(inputCalories)
 
-		} else if elf.calories > topThreeCalories[2] {
-			topThreeCalories[2] = elf.calories
-		}
-	}
-
-	for _, calories := range topThreeCalories {
+	for _, calories := range inputCalories[len(inputCalories)-3:] {
 		mostCalories += calories
 	}
 
 	return mostCalories
 }
 
-func getListOfElves(input []string) []elf {
-	elves := []elf{}
-
-	elf := elf{calories: 0}
+func getListOfCalories(input []string) []int {
+	caloriesArray := []int{}
+	caloriesSum := 0
 
 	for _, line := range input {
 		if line == "" {
-			elves = append(elves, elf)
-			elf.calories = 0
+			caloriesArray = append(caloriesArray, caloriesSum)
+			caloriesSum = 0
 		} else {
 			calories, err := strconv.Atoi(line)
 			if err != nil {
 				fmt.Println(err)
 			}
-			elf.calories += calories
+			caloriesSum += calories
 		}
 	}
-	elves = append(elves, elf)
+	caloriesArray = append(caloriesArray, caloriesSum)
 
-	return elves
+	return caloriesArray
 }

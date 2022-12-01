@@ -42,8 +42,8 @@ func TestResolveTaskOne(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ResolveTaskOne(tt.args.input); got != tt.want {
-				t.Errorf("ResolveTaskOne() = %v, want %v", got, tt.want)
+			if got := resolveTaskOne(tt.args.input); got != tt.want {
+				t.Errorf("resolveTaskOne() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -68,8 +68,8 @@ func TestResolveTaskTwo(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := ResolveTaskTwo(tt.args.input); got != tt.want {
-				t.Errorf("ResolveTaskTwo() = %v, want %v", got, tt.want)
+			if got := resolveTaskTwo(tt.args.input); got != tt.want {
+				t.Errorf("resolveTaskTwo() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -77,7 +77,7 @@ func TestResolveTaskTwo(t *testing.T) {
 
 func Test_getMostCalories(t *testing.T) {
 	type args struct {
-		elves []elf
+		calories []int
 	}
 	tests := []struct {
 		name string
@@ -87,29 +87,14 @@ func Test_getMostCalories(t *testing.T) {
 		{
 			name: "Test input",
 			args: args{
-				[]elf{
-					{
-						calories: 6000,
-					},
-					{
-						calories: 4000,
-					},
-					{
-						calories: 11000,
-					},
-					{
-						calories: 24000,
-					}, {
-						calories: 10000,
-					},
-				},
+				[]int{6000, 4000, 11000, 24000, 10000},
 			},
 			want: 24000,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := getMostCalories(tt.args.elves); got != tt.want {
+			if got := getMostCalories(tt.args.calories); got != tt.want {
 				t.Errorf("getMostCalories() = %v, want %v", got, tt.want)
 			}
 		})
@@ -118,7 +103,7 @@ func Test_getMostCalories(t *testing.T) {
 
 func Test_getSumOfTopThreeCalories(t *testing.T) {
 	type args struct {
-		elves []elf
+		calories []int
 	}
 	tests := []struct {
 		name string
@@ -128,71 +113,41 @@ func Test_getSumOfTopThreeCalories(t *testing.T) {
 		{
 			name: "Test input",
 			args: args{
-				[]elf{
-					{
-						calories: 6000,
-					},
-					{
-						calories: 4000,
-					},
-					{
-						calories: 11000,
-					},
-					{
-						calories: 24000,
-					}, {
-						calories: 10000,
-					},
-				},
+				[]int{6000, 4000, 11000, 24000, 10000},
 			},
 			want: 45000,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := getSumOfTopThreeCalories(tt.args.elves); got != tt.want {
+			if got := getSumOfTopThreeCalories(tt.args.calories); got != tt.want {
 				t.Errorf("getSumOfTopThreeCalories() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func Test_getListOfElves(t *testing.T) {
+func Test_getListOfCalories(t *testing.T) {
 	type args struct {
 		input []string
 	}
 	tests := []struct {
 		name string
 		args args
-		want []elf
+		want []int
 	}{
 		{
 			name: "Test input",
 			args: args{
 				input: getTestArray(),
 			},
-			want: []elf{
-				{
-					calories: 6000,
-				},
-				{
-					calories: 4000,
-				},
-				{
-					calories: 11000,
-				},
-				{
-					calories: 24000,
-				}, {
-					calories: 10000,
-				},
-			},
+			want: []int{6000, 4000, 11000, 24000, 10000},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := getListOfElves(tt.args.input); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("getListOfElves() = %v, want %v", got, tt.want)
+			if got := getListOfCalories(tt.args.input); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("getListOfCalories() = %v, want %v", got, tt.want)
 			}
 		})
 	}

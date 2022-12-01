@@ -1,6 +1,7 @@
 package main
 
 import (
+	day "adventofcode/days"
 	"adventofcode/days/one"
 	"bufio"
 	"fmt"
@@ -15,19 +16,15 @@ type task struct {
 }
 
 func main() {
-	tasks := []task{
-		{
-			filepath: "./days/one/input.txt",
-			name:     "one",
-			task1:    one.ResolveTaskOne,
-			task2:    one.ResolveTaskTwo,
-		},
+
+	days := []day.Day{
+		one.GetTask(),
 	}
 
-	for _, task := range tasks {
-		input := readFileToStringArray(task.filepath)
-		fmt.Printf("Result for day %v task 1: %v\n", task.name, task.task1(input))
-		fmt.Printf("Result for day %v task 2: %v\n", task.name, task.task2(input))
+	for _, day := range days {
+		input := readFileToStringArray(day.AbsoluteFilepath)
+		fmt.Printf("Result for day %v task 1: %v\n", day.Name, day.Task1(input))
+		fmt.Printf("Result for day %v task 2: %v\n", day.Name, day.Task2(input))
 	}
 
 }

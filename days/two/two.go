@@ -5,6 +5,12 @@ import (
 	"strings"
 )
 
+var selectionPoints = map[string]int{
+	"X": 1,
+	"Y": 2,
+	"Z": 3,
+}
+
 func GetTask() days.Day {
 	return days.Day{
 		Name:             "Two",
@@ -40,13 +46,7 @@ func resolveTaskTwo(input []string) int {
 func getSingleResult(input []string) int {
 	ownSelection := input[1]
 	result := 0
-	if ownSelection == "X" {
-		result = 1
-	} else if ownSelection == "Y" {
-		result = 2
-	} else if ownSelection == "Z" {
-		result = 3
-	}
+	result += selectionPoints[ownSelection]
 	result += getWinPoints(input)
 
 	return result

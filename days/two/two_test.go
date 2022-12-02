@@ -62,7 +62,7 @@ func TestResolveTaskTwo(t *testing.T) {
 			args: args{
 				input: getTestArray(),
 			},
-			want: 45000,
+			want: 12,
 		},
 	}
 	for _, tt := range tests {
@@ -149,6 +149,46 @@ func TestGetWinPoints(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := getWinPoints(tt.args.input); got != tt.want {
 				t.Errorf("getWinPoints() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestGetStrategySelection(t *testing.T) {
+	type args struct {
+		input []string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			name: "First example",
+			args: args{input: []string{
+				"A", "Y",
+			}},
+			want: "X",
+		},
+		{
+			name: "Second example",
+			args: args{input: []string{
+				"B", "X",
+			}},
+			want: "X",
+		},
+		{
+			name: "Third example",
+			args: args{input: []string{
+				"C", "Z",
+			}},
+			want: "X",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := getStrategySelection(tt.args.input); got != tt.want {
+				t.Errorf("getStrategySelection() = %v, want %v", got, tt.want)
 			}
 		})
 	}

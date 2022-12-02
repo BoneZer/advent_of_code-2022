@@ -5,6 +5,40 @@ import (
 	"strings"
 )
 
+const winPoints = 6
+const drawPoints = 3
+const loosePoints = 0
+
+var selectionPoints = map[string]int{
+	"X": 1,
+	"Y": 2,
+	"Z": 3,
+}
+
+var matchConstellations = map[string]map[string]int{
+	"A": {
+		"Y": winPoints,
+		"X": drawPoints,
+		"Z": loosePoints,
+	},
+	"B": {
+		"Z": winPoints,
+		"Y": drawPoints,
+		"X": loosePoints,
+	},
+	"C": {
+		"X": winPoints,
+		"Z": drawPoints,
+		"Y": loosePoints,
+	},
+}
+
+var suggestionStrategy = map[string]int{
+	"X": loosePoints,
+	"Y": drawPoints,
+	"Z": winPoints,
+}
+
 func GetTask() days.Day {
 	return days.Day{
 		Name:             "Two",
@@ -15,22 +49,21 @@ func GetTask() days.Day {
 }
 
 func resolveTaskOne(input []string) int {
-	sumResult := 0
-
-	for _, inputLine := range input {
-		match := strings.Split(inputLine, " ")
-		sumResult += getSingleResult(match)
-	}
-
-	return sumResult
+	return getCompleteResult(input, false)
 }
 
 func resolveTaskTwo(input []string) int {
+	return getCompleteResult(input, true)
+}
+
+func getCompleteResult(input []string, swapForStrategy bool) int {
 	sumResult := 0
 
 	for _, inputLine := range input {
 		match := strings.Split(inputLine, " ")
-		match[1] = getStrategySelection(match)
+		if swapForStrategy {
+			match[1] = getStrategySelection(match)
+		}
 		sumResult += getSingleResult(match)
 	}
 
@@ -40,94 +73,25 @@ func resolveTaskTwo(input []string) int {
 func getSingleResult(input []string) int {
 	ownSelection := input[1]
 	result := 0
-	if ownSelection == "X" {
-		result = 1
-	} else if ownSelection == "Y" {
-		result = 2
-	} else if ownSelection == "Z" {
-		result = 3
-	}
+	result += selectionPoints[ownSelection]
 	result += getWinPoints(input)
 
 	return result
 }
 
 func getWinPoints(input []string) int {
-	opponentSelection := input[0]
-	ownSelection := input[1]
-
-	if opponentSelection == "A" {
-		if ownSelection == "X" {
-			return 3
-		}
-		if ownSelection == "Y" {
-			return 6
-		}
-		if ownSelection == "Z" {
-			return 0
-		}
-	}
-	if opponentSelection == "B" {
-		if ownSelection == "X" {
-			return 0
-		}
-		if ownSelection == "Y" {
-			return 3
-		}
-		if ownSelection == "Z" {
-			return 6
-		}
-	}
-	if opponentSelection == "C" {
-		if ownSelection == "X" {
-			return 6
-		}
-		if ownSelection == "Y" {
-			return 0
-		}
-		if ownSelection == "Z" {
-			return 3
-		}
-	}
-
-	return 0
+	return matchConstellations[input[0]][input[1]]
 }
 
 func getStrategySelection(input []string) string {
 	opponentSelection := input[0]
-	ownSelection := input[1]
+	strategy := suggestionStrategy[input[1]]
 
-	if opponentSelection == "A" {
-		if ownSelection == "X" {
-			return "Z"
-		}
-		if ownSelection == "Y" {
-			return "X"
-		}
-		if ownSelection == "Z" {
-			return "Y"
-		}
-	}
-	if opponentSelection == "B" {
-		if ownSelection == "X" {
-			return "X"
-		}
-		if ownSelection == "Y" {
-			return "Y"
-		}
-		if ownSelection == "Z" {
-			return "Z"
-		}
-	}
-	if opponentSelection == "C" {
-		if ownSelection == "X" {
-			return "Y"
-		}
-		if ownSelection == "Y" {
-			return "Z"
-		}
-		if ownSelection == "Z" {
-			return "X"
+	x := matchConstellations[opponentSelection]
+
+	for i := range x {
+		if x[i] == strategy {
+			return i
 		}
 	}
 

@@ -3,6 +3,7 @@ package main
 import (
 	day "adventofcode/days"
 	"adventofcode/days/one"
+	"adventofcode/days/three"
 	"adventofcode/days/two"
 	"bufio"
 	"fmt"
@@ -21,6 +22,7 @@ func main() {
 	days := []day.Day{
 		one.GetTask(),
 		two.GetTask(),
+		three.GetTask(),
 	}
 
 	for _, day := range days {

@@ -2,15 +2,21 @@ package three
 
 import (
 	"adventofcode/days"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetTask() days.Day {
 	return days.Day{
-		Name:             "Two",
-		AbsoluteFilepath: "./days/three/input.txt",
-		Task1:            resolveTaskOne,
-		Task2:            resolveTaskTwo,
+		Name:               "Three",
+		AbsoluteFilepath:   "./days/three/input.txt",
+		Task1:              resolveTaskOne,
+		Task2:              resolveTaskTwo,
+		RouteSetupFunction: setUpRoutes,
 	}
+}
+
+func setUpRoutes(router *gin.Engine, input []string) {
 }
 
 func resolveTaskOne(input []string) int {

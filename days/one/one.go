@@ -3,16 +3,38 @@ package one
 import (
 	"adventofcode/days"
 	"fmt"
+	"net/http"
 	"sort"
 	"strconv"
+	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetTask() days.Day {
 	return days.Day{
-		Name:             "One",
-		AbsoluteFilepath: "./days/one/input.txt",
-		Task1:            resolveTaskOne,
-		Task2:            resolveTaskTwo,
+		Name:               "One",
+		AbsoluteFilepath:   "./days/one/input.txt",
+		Task1:              resolveTaskOne,
+		Task2:              resolveTaskTwo,
+		RouteSetupFunction: setUpRoutes,
+	}
+}
+
+func setUpRoutes(router *gin.Engine, input []string) {
+	taskNameLowerCase := strings.ToLower(GetTask().Name)
+	router.GET(taskNameLowerCase+"/calories", getRouteListOfCalories(router, input))
+}
+
+func getRouteInputStrings(router *gin.Engine, input []string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.IndentedJSON(http.StatusOK, input)
+	}
+}
+
+func getRouteListOfCalories(router *gin.Engine, input []string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.IndentedJSON(http.StatusOK, getListOfCalories(input))
 	}
 }
 

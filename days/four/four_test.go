@@ -50,6 +50,32 @@ func Test_resolveTaskOne(t *testing.T) {
 	}
 }
 
+func Test_resolveTaskTwo(t *testing.T) {
+	type args struct {
+		input []string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "Test input",
+			args: args{
+				input: getTestArray(),
+			},
+			want: 4,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := resolveTaskTwo(tt.args.input); got != tt.want {
+				t.Errorf("resolveTaskTwo() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func Test_splitElves(t *testing.T) {
 	type args struct {
 		input string
@@ -122,26 +148,6 @@ func TestGetTask(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := GetTask(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("GetTask() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
-func Test_resolveTaskTwo(t *testing.T) {
-	type args struct {
-		input []string
-	}
-	tests := []struct {
-		name string
-		args args
-		want int
-	}{
-		// TODO: Add test cases.
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := resolveTaskTwo(tt.args.input); got != tt.want {
-				t.Errorf("resolveTaskTwo() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -301,6 +307,115 @@ func Test_sectionsCompleteOverlapping(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := sectionsCompleteOverlapping(tt.args.input); got != tt.want {
 				t.Errorf("sectionsCompleteOverlapping() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_sectionsOverlapping(t *testing.T) {
+	type args struct {
+		input [][]int
+	}
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		{
+			name: "First test input",
+			args: args{
+				input: [][]int{
+					{2, 4}, {6, 8},
+				},
+			},
+			want: false,
+		},
+		{
+			name: "Second test input",
+			args: args{
+				input: [][]int{
+					{2, 3}, {4, 5},
+				},
+			},
+			want: false,
+		},
+		{
+			name: "Third test input",
+			args: args{
+				input: [][]int{
+					{5, 7}, {7, 9},
+				},
+			},
+			want: true,
+		},
+		{
+			name: "Fourth test input",
+			args: args{
+				input: [][]int{
+					{2, 8}, {3, 7},
+				},
+			},
+			want: true,
+		},
+		{
+			name: "Fifth test input",
+			args: args{
+				input: [][]int{
+					{6, 6}, {4, 6},
+				},
+			},
+			want: true,
+		},
+		{
+			name: "Sixth test input",
+			args: args{
+				input: [][]int{
+					{2, 6}, {4, 8},
+				},
+			},
+			want: true,
+		},
+		{
+			name: "Edge case one",
+			args: args{
+				input: [][]int{
+					{1, 4}, {1, 6},
+				},
+			},
+			want: true,
+		},
+		{
+			name: "Edge case two",
+			args: args{
+				input: [][]int{
+					{2, 39}, {1, 39},
+				},
+			},
+			want: true,
+		},
+		{
+			name: "Edge case three",
+			args: args{
+				input: [][]int{
+					{1, 2}, {3, 99},
+				},
+			},
+			want: false,
+		},
+		{
+			name: "Edge case four",
+			args: args{
+				input: [][]int{
+					{1, 12}, {1, 4},
+				},
+			},
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := sectionsOverlapping(tt.args.input); got != tt.want {
+				t.Errorf("sectionsOverlapping() = %v, want %v", got, tt.want)
 			}
 		})
 	}

@@ -33,8 +33,20 @@ func resolveTaskOne(input []string) int {
 }
 
 func resolveTaskTwo(input []string) int {
-	itemSum := 0
-	return itemSum
+	overlappingsSum := 0
+
+	for _, line := range input {
+		elves := splitElves(line)
+		sections := [][]int{}
+		for _, elf := range elves {
+			sections = append(sections, getMinAndMaxSections(elf))
+		}
+		if sectionsOverlapping(sections) {
+			overlappingsSum++
+		}
+	}
+
+	return overlappingsSum
 }
 
 func splitElves(input string) []string {
@@ -66,6 +78,27 @@ func sectionsCompleteOverlapping(input [][]int) bool {
 		if maxSecondSection > maxFirstSection || maxSecondSection == maxFirstSection {
 			return true
 		}
+	}
+
+	return false
+}
+
+func sectionsOverlapping(input [][]int) bool {
+	minFirstSection := input[0][0]
+	maxFirstSection := input[0][1]
+	minSecondSection := input[1][0]
+	maxSecondSection := input[1][1]
+
+	if minFirstSection < minSecondSection {
+		if maxFirstSection >= minSecondSection {
+			return true
+		}
+	} else if minSecondSection < minFirstSection {
+		if maxSecondSection >= minFirstSection {
+			return true
+		}
+	} else if minFirstSection == minSecondSection {
+		return true
 	}
 
 	return false

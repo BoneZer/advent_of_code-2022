@@ -2,6 +2,7 @@ package main
 
 import (
 	day "adventofcode/days"
+	"adventofcode/days/four"
 	"adventofcode/days/one"
 	"adventofcode/days/three"
 	"adventofcode/days/two"
@@ -10,19 +11,13 @@ import (
 	"os"
 )
 
-type task struct {
-	filepath string
-	name     string
-	task1    func([]string) int
-	task2    func([]string) int
-}
-
 func main() {
 
 	days := []day.Day{
 		one.GetTask(),
 		two.GetTask(),
 		three.GetTask(),
+		four.GetTask(),
 	}
 
 	for _, day := range days {

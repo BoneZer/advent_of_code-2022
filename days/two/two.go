@@ -2,6 +2,7 @@ package two
 
 import (
 	"adventofcode/days"
+	"strconv"
 	"strings"
 )
 
@@ -48,12 +49,12 @@ func GetTask() days.Day {
 	}
 }
 
-func resolveTaskOne(input []string) int {
-	return getCompleteResult(input, false)
+func resolveTaskOne(input []string) string {
+	return strconv.Itoa(getCompleteResult(input, false))
 }
 
-func resolveTaskTwo(input []string) int {
-	return getCompleteResult(input, true)
+func resolveTaskTwo(input []string) string {
+	return strconv.Itoa(getCompleteResult(input, true))
 }
 
 func getCompleteResult(input []string, swapForStrategy bool) int {

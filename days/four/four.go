@@ -8,14 +8,14 @@ import (
 
 func GetTask() days.Day {
 	return days.Day{
-		Name:             "Two",
+		Name:             "Four",
 		AbsoluteFilepath: "./days/four/input.txt",
 		Task1:            resolveTaskOne,
 		Task2:            resolveTaskTwo,
 	}
 }
 
-func resolveTaskOne(input []string) int {
+func resolveTaskOne(input []string) string {
 	overlappingsSum := 0
 
 	for _, line := range input {
@@ -29,10 +29,10 @@ func resolveTaskOne(input []string) int {
 		}
 	}
 
-	return overlappingsSum
+	return strconv.Itoa(overlappingsSum)
 }
 
-func resolveTaskTwo(input []string) int {
+func resolveTaskTwo(input []string) string {
 	overlappingsSum := 0
 
 	for _, line := range input {
@@ -46,7 +46,7 @@ func resolveTaskTwo(input []string) int {
 		}
 	}
 
-	return overlappingsSum
+	return strconv.Itoa(overlappingsSum)
 }
 
 func splitElves(input string) []string {

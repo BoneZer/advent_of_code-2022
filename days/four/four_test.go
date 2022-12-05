@@ -31,14 +31,14 @@ func Test_resolveTaskOne(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want int
+		want string
 	}{
 		{
 			name: "Test input",
 			args: args{
 				input: getTestArray(),
 			},
-			want: 2,
+			want: "2",
 		},
 	}
 	for _, tt := range tests {
@@ -57,14 +57,14 @@ func Test_resolveTaskTwo(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want int
+		want string
 	}{
 		{
 			name: "Test input",
 			args: args{
 				input: getTestArray(),
 			},
-			want: 4,
+			want: "4",
 		},
 	}
 	for _, tt := range tests {

@@ -16,12 +16,12 @@ func GetTask() days.Day {
 	}
 }
 
-func resolveTaskOne(input []string) int {
-	return getMostCalories(getListOfCalories(input))
+func resolveTaskOne(input []string) string {
+	return strconv.Itoa(getMostCalories(getListOfCalories(input)))
 }
 
-func resolveTaskTwo(input []string) int {
-	return getSumOfTopThreeCalories(getListOfCalories(input))
+func resolveTaskTwo(input []string) string {
+	return strconv.Itoa(getSumOfTopThreeCalories(getListOfCalories(input)))
 }
 
 func getMostCalories(inputCalories []int) int {

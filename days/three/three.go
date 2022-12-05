@@ -2,18 +2,19 @@ package three
 
 import (
 	"adventofcode/days"
+	"strconv"
 )
 
 func GetTask() days.Day {
 	return days.Day{
-		Name:             "Two",
+		Name:             "Three",
 		AbsoluteFilepath: "./days/three/input.txt",
 		Task1:            resolveTaskOne,
 		Task2:            resolveTaskTwo,
 	}
 }
 
-func resolveTaskOne(input []string) int {
+func resolveTaskOne(input []string) string {
 	itemSum := 0
 
 	for _, backpack := range input {
@@ -22,10 +23,10 @@ func resolveTaskOne(input []string) int {
 		itemSum += getPriorityPoints(doubleItem)
 	}
 
-	return itemSum
+	return strconv.Itoa(itemSum)
 }
 
-func resolveTaskTwo(input []string) int {
+func resolveTaskTwo(input []string) string {
 	itemSum := 0
 	groupsOfElves := getGroupsOfElves(input)
 	for _, groupOfElves := range groupsOfElves {
@@ -33,7 +34,7 @@ func resolveTaskTwo(input []string) int {
 		itemSum += getPriorityPoints(badge)
 	}
 
-	return itemSum
+	return strconv.Itoa(itemSum)
 }
 
 func splitBackpackInput(input string) []string {

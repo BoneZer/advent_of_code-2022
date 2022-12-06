@@ -5,15 +5,21 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 func GetTask() days.Day {
 	return days.Day{
-		Name:             "Five",
-		AbsoluteFilepath: "./days/five/input.txt",
-		Task1:            resolveTaskOne,
-		Task2:            resolveTaskTwo,
+		Name:               "Five",
+		AbsoluteFilepath:   "./days/five/input.txt",
+		Task1:              resolveTaskOne,
+		Task2:              resolveTaskTwo,
+		RouteSetupFunction: setUpRoutes,
 	}
+}
+
+func setUpRoutes(router *gin.Engine, input []string) {
 }
 
 func resolveTaskOne(input []string) string {

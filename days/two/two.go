@@ -4,6 +4,8 @@ import (
 	"adventofcode/days"
 	"strconv"
 	"strings"
+
+	"github.com/gin-gonic/gin"
 )
 
 const winPoints = 6
@@ -42,11 +44,15 @@ var suggestionStrategy = map[string]int{
 
 func GetTask() days.Day {
 	return days.Day{
-		Name:             "Two",
-		AbsoluteFilepath: "./days/two/input.txt",
-		Task1:            resolveTaskOne,
-		Task2:            resolveTaskTwo,
+		Name:               "Two",
+		AbsoluteFilepath:   "./days/two/input.txt",
+		Task1:              resolveTaskOne,
+		Task2:              resolveTaskTwo,
+		RouteSetupFunction: setUpRoutes,
 	}
+}
+
+func setUpRoutes(router *gin.Engine, input []string) {
 }
 
 func resolveTaskOne(input []string) string {

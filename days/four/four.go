@@ -21,7 +21,7 @@ func GetTask() days.Day {
 func setUpRoutes(router *gin.Engine, input []string) {
 }
 
-func resolveTaskOne(input []string) int {
+func resolveTaskOne(input []string) string {
 	overlappingsSum := 0
 
 	for _, line := range input {
@@ -35,10 +35,10 @@ func resolveTaskOne(input []string) int {
 		}
 	}
 
-	return overlappingsSum
+	return strconv.Itoa(overlappingsSum)
 }
 
-func resolveTaskTwo(input []string) int {
+func resolveTaskTwo(input []string) string {
 	overlappingsSum := 0
 
 	for _, line := range input {
@@ -52,7 +52,7 @@ func resolveTaskTwo(input []string) int {
 		}
 	}
 
-	return overlappingsSum
+	return strconv.Itoa(overlappingsSum)
 }
 
 func splitElves(input string) []string {

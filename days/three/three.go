@@ -2,6 +2,7 @@ package three
 
 import (
 	"adventofcode/days"
+	"strings"
 
 	"strconv"
 
@@ -50,10 +51,9 @@ func splitBackpackInput(input string) []string {
 
 func findDoubleItem(input []string) rune {
 	for _, item := range input[0] {
-		for _, secondItem := range input[1] {
-			if item == secondItem {
-				return item
-			}
+		indexFoundItem := strings.Index(input[1], string(item))
+		if indexFoundItem >= 0 {
+			return rune(input[1][indexFoundItem])
 		}
 	}
 	return 0
@@ -81,12 +81,10 @@ func getGroupsOfElves(input []string) [][]string {
 
 func getBadgeOfElveGroup(input []string) rune {
 	for _, firstElf := range input[0] {
-		for _, secondElf := range input[1] {
-			for _, thirdElf := range input[2] {
-				if firstElf == secondElf && secondElf == thirdElf {
-					return firstElf
-				}
-			}
+		indexFoundSecondElf := strings.Index(input[1], string(firstElf))
+		indexFoundThirdElf := strings.Index(input[2], string(firstElf))
+		if indexFoundSecondElf >= 0 && indexFoundThirdElf >= 0 {
+			return firstElf
 		}
 	}
 
